@@ -56,7 +56,7 @@ namespace CoffeeMakerTests
 
 
         [Fact]
-        public void WhenThereIsNoPotOnThePlate_Then_EnableCoffeeFlow()
+        public void WhenThereIsNoPotOnThePlate_Then_DisableCoffeeFlow()
         {
             _api.Plate = (int)PlateStatus.NoPot;
             _target = new MarkIV(_api);
@@ -64,9 +64,9 @@ namespace CoffeeMakerTests
         }
 
         [Theory]
-        [InlineData(PlateStatus.NonEmptyPot)]
+        [InlineData(PlateStatus.NonEmptyPot)]         
         [InlineData(PlateStatus.EmptyPot)]
-        public void WhenThereIsAPotOnThePlate_Then_CloseTheValveToDisableCoffeeFlow(PlateStatus status)
+        public void WhenThereIsAPotOnThePlate_Then_EnableCoffeeFlow(PlateStatus status)
         {
             _api.Plate = (int)status;
             _target = new MarkIV(_api);
