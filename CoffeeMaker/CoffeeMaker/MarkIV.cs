@@ -16,6 +16,8 @@ namespace CoffeeMaker
         public void Start()
         {
             _api.SetBoiler(true);
+            
+            _api.SetValve(!_api.GetBoiler());  //release pressure when boiler is empty
         }
     }
 }

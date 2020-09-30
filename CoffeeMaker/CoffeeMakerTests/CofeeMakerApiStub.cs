@@ -4,7 +4,8 @@ namespace CoffeeMakerTests
 {
     public class CofeeMakerApiStub:ICoffeeMakerApi
     {
-        public bool Boiler { get; private set; }
+        public bool HeaterIsActive { get; private set; }
+        public bool BoilerHasWater { get; set; }
         public bool Warmer { get; private set; }
         public bool Valve { get; private set; }
         public bool Light { get; set; }
@@ -13,7 +14,7 @@ namespace CoffeeMakerTests
 
         public void SetBoiler(bool value)
         {
-            Boiler = value;
+            HeaterIsActive = value;
         }
 
         public void SetWarmer(bool value)
@@ -33,7 +34,7 @@ namespace CoffeeMakerTests
 
         public bool GetBoiler()
         {
-            return Boiler;
+            return BoilerHasWater;
         }
 
         public int GetPlate()

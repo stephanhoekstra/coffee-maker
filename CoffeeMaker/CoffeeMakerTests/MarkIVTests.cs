@@ -16,21 +16,22 @@ namespace CoffeeMakerTests
             _target = new MarkIV(_api);
         }
 
-
         [Fact]
-        public void When_Started_WithFullBoiler_And_EmptyPot_Then_Boil()
+        public void When_Started_WithFullBoiler_ThenBoil()
         {
+            _api.BoilerHasWater = true;
             _target.Start();
 
-            Assert.True(_api.Boiler);
+            Assert.True(_api.HeaterIsActive);
+            Assert.False(_api.Valve);
         }
 
         [Fact]
-        public void When_Started_WithEmptyBoiler_And_EmptyPot_Then_StopBoiling()
+        public void When_Start_WithEmptyBoiler_Then_ContinueBoiling_ButAlso_ReleasePressure()
         {
             _target.Start();
-
-            Assert.False(_api.Boiler);
+            Assert.True(_api.HeaterIsActive);
+            Assert.True(_api.Valve);
         }
     }
 }
