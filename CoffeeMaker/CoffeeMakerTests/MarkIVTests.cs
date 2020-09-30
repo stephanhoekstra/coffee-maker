@@ -22,6 +22,20 @@ namespace CoffeeMakerTests
 
             //assert that we have coffee
 
+        private CofeeMakerApiStub _api;
+
+        public MarkIVTests()
+        {
+            _api = new CofeeMakerApiStub();
+            _target = new MarkIV(_api);
+        }
+
+        [Fact]
+        public void When_Started_WithFullBoiler_And_EmptyPot_Then_Boil()
+        {
+            _target.Start();
+
+            Assert.True(_api.Boiler);
         }
     }
 }
