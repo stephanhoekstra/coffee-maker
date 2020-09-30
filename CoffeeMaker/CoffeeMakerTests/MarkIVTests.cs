@@ -39,7 +39,7 @@ namespace CoffeeMakerTests
 
 
         [Fact]
-        public void WhenThereIsaPotOnTheWarmer_AndThePotIsEmpty_ThenDoNotWarmThePot()
+        public void WhenThereIsaPotOnThePlate_AndThePotIsEmpty_ThenDoNotWarmThePot()
         {
             _api.Plate = (int)PlateStatus.EmptyPot;
             _target = new MarkIV(_api);
@@ -47,12 +47,38 @@ namespace CoffeeMakerTests
         }
 
         [Fact]
-        public void WhenThereIsNoPotOnTheWarmer_AndThePotIsEmpty_ThenDoNotWarmThePot()
+        public void WhenThereIsNoPotOnThePlate_AndThePotIsEmpty_ThenDoNotWarmThePot()
         {
             _api.Plate = (int)PlateStatus.NoPot;
             _target = new MarkIV(_api);
             Assert.False(_api.Warmer);
         }
 
+
+        [Fact]
+        public void WhenThereIsNoPotOnThePlate_Then_EnableCoffeeFlow()
+        {
+            _api.Plate = (int)PlateStatus.NoPot;
+            _target = new MarkIV(_api);
+            Assert.True(_api.Valve);
+        }
+
+        [Theory]
+        [InlineData(PlateStatus.NonEmptyPot)]
+        [InlineData(PlateStatus.EmptyPot)]
+        public void WhenThereIsAPotOnThePlate_Then_CloseTheValveToDisableCoffeeFlow(PlateStatus status)
+        {
+            _api.Plate = (int)status;
+            _target = new MarkIV(_api);
+            Assert.False(_api.Valve);
+        }
+
+        [Fact]
+        public void WhenThereIsNoPotOnThePlate_Then_OpenTheValveToReleasePressure()
+        {
+            _api.Plate = (int)PlateStatus.NoPot;
+            _target = new MarkIV(_api);
+            Assert.True(_api.Valve);
+        }
     }
 }

@@ -10,8 +10,10 @@ namespace CoffeeMaker
             var valve = new Valve(api);
             var boiler = new Boiler(api);
             var warmer = new Warmer(api);
-            
-            warmer.OnPlateChanged(this, new PlateEventArgs{Status = (PlateStatus) api.GetPlate()});
+
+            var plateStatus = api.GetPlate();
+            warmer.OnPlateChanged(this, new PlateEventArgs{Status = (PlateStatus) plateStatus});
+            valve.OnPlateChanged(this, new PlateEventArgs { Status = (PlateStatus)plateStatus });
             boiler.BoilerChanged +=valve.OnBoilerChanged;
             boiler.Trigger();
         }

@@ -11,6 +11,20 @@ namespace CoffeeMaker
             _api = api;
         }
 
+        public void OnPlateChanged(object sender, PlateEventArgs e)
+        {
+            switch (e.Status)
+            {
+                case PlateStatus.NoPot:
+                    _api.SetValve(true);
+                    break;
+                case PlateStatus.NonEmptyPot:
+                case PlateStatus.EmptyPot:
+                    _api.SetValve(false);
+                    break;
+            }
+        }
+
         public void OnBoilerChanged(object sender, BoilerEventArgs e)
         {
         }
