@@ -29,6 +29,17 @@ namespace CoffeeMakerTests
             Assert.False(_api.Valve);
         }
 
+        //[Fact]
+        //public void WhenBoilerIsEmpty_Then_ContinueBoiling_ButAlso_ReleasePressure()
+        //{
+        //    _api.BoilerHasWater = false;
+            
+        //    _target = new MarkIV(_api);
+
+        //    Assert.True(_api.HeaterIsActive);
+        //    Assert.True(_api.Valve);
+        //}
+
         [Fact]
         public void WhenThereIsaPotOnTheWarmer_AndThePotIsNotEmpty_ThenWarmThePot()
         {
