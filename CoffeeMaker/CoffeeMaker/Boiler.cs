@@ -27,10 +27,13 @@ namespace CoffeeMaker
 
         public event EventHandler<BoilerEventArgs> BoilerChanged;
 
-        public void Trigger()
+        public void OnButtonChanged(object sender, ButtonEventArgs e)
         {
+            if(e.Active == false) return;
+            
             _api.SetBoiler(true);
             BoilerChanged?.Invoke(this, new BoilerEventArgs {IsEmpty = IsEmpty});
         }
+        
     }
 }

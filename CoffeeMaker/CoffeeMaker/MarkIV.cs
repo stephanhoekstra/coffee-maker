@@ -13,9 +13,9 @@ namespace CoffeeMaker
 
             var plateStatus = api.GetPlate();
             warmer.OnPlateChanged(this, new PlateEventArgs{Status = (PlateStatus) plateStatus});
-            valve.OnPlateChanged(this, new PlateEventArgs { Status = (PlateStatus)plateStatus });
+            valve.OnPlateChanged(this, new PlateEventArgs {Status = (PlateStatus) plateStatus});
+            boiler.OnButtonChanged(this, new ButtonEventArgs {Active = api.GetButton()});
             boiler.BoilerChanged +=valve.OnBoilerChanged;
-            boiler.Trigger();
         }
     }
 

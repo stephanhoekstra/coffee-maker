@@ -16,7 +16,16 @@ namespace CoffeeMakerTests
         }
 
         [Fact]
-        public void WhenBoilerIsNotEmpty_ThenBoil()
+        public void WhenNotStarted_AndBoilerIsNotEmpty_ThenDoNotBoil()
+        {
+            _api.BoilerHasWater = true;
+            _target = new MarkIV(_api);
+
+            Assert.False(_api.HeaterIsActive);
+        }
+
+        [Fact]
+        public void WhenStarted_AndBoilerIsNotEmpty_ThenBoil()
         {
             _api.Button = true;
             _api.BoilerHasWater = true;
