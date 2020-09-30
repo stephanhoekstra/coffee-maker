@@ -1,5 +1,3 @@
-using CoffeeMaker;
-using CoffeeMakerApi;
 using Moq;
 using Xunit;
 
