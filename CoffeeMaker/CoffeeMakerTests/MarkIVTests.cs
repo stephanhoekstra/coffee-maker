@@ -15,8 +15,6 @@ namespace CoffeeMakerTests
             _api = new CofeeMakerApiStub();
         }
 
-       
-
         [Fact]
         public void WhenBoilerIsNotEmpty_ThenBoil()
         {
@@ -63,9 +61,16 @@ namespace CoffeeMakerTests
             Assert.True(_api.Valve);
         }
 
+        /// <summary>
+        /// there is no status to distinguish a pot with some coffee from a pot which is full,
+        /// so keep the coffee flowing
+        /// potential bug: if you put more water in the boiler than the pot can hold, you can overflow it.
+        /// assuming this will never happen because you probably use the pot to fill the boiler.
+        /// </summary>
+        /// <param name="status"></param>
         [Theory]
-        [InlineData(PlateStatus.NonEmptyPot)]         
-        [InlineData(PlateStatus.EmptyPot)]
+        [InlineData(PlateStatus.NonEmptyPot)]  
+        [InlineData(PlateStatus.EmptyPot)]          
         public void WhenThereIsAPotOnThePlate_Then_EnableCoffeeFlow(PlateStatus status)
         {
             _api.Plate = (int)status;
