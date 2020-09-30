@@ -1,12 +1,9 @@
 ﻿using System;
+using CoffeeMakerApi;
 
 namespace CoffeeMaker
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
-    }
+
+    //todo implementation goes here
+
 }
