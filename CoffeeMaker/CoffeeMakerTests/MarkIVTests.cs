@@ -30,14 +30,11 @@ namespace CoffeeMakerTests
         }
 
         [Fact]
-        public void WhenBoilerIsEmpty_Then_ContinueBoiling_ButAlso_ReleasePressure()
+        public void WhenThereIsaPotOnTheWarmer_AndThePotIsNotEmpty_ThenWarmThePot()
         {
-            _api.BoilerHasWater = false;
-            
+            _api.Plate = 3;
             _target = new MarkIV(_api);
-
-            Assert.True(_api.HeaterIsActive);
-            Assert.True(_api.Valve);
+            Assert.True(_api.Warmer);
         }
     }
 }
