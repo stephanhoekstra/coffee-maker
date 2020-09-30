@@ -13,7 +13,6 @@ namespace CoffeeMaker
 
         public void OnBoilerChanged(object sender, BoilerEventArgs e)
         {
-            _api.SetValve(e.IsEmpty);
         }
     }
 }
