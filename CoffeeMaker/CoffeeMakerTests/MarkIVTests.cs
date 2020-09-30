@@ -57,5 +57,13 @@ namespace CoffeeMakerTests
             Assert.False(_api.Warmer);
         }
 
+        [Fact]
+        public void WhenThereIsNoPotOnTheWarmer_AndThePotIsEmpty_ThenDoNotWarmThePot()
+        {
+            _api.Plate = (int)PlateStatus.NoPot;
+            _target = new MarkIV(_api);
+            Assert.False(_api.Warmer);
+        }
+
     }
 }
