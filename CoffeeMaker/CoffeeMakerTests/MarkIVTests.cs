@@ -24,5 +24,13 @@ namespace CoffeeMakerTests
 
             Assert.True(_api.Boiler);
         }
+
+        [Fact]
+        public void When_Started_WithEmptyBoiler_And_EmptyPot_Then_StopBoiling()
+        {
+            _target.Start();
+
+            Assert.False(_api.Boiler);
+        }
     }
 }
