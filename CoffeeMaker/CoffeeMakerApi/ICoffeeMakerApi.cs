@@ -11,6 +11,6 @@ namespace CoffeeMakerApi
 
         bool GetBoiler();
         int GetPlate();
-        void GetButton();
+        bool GetButton();     //mistake!
     }
 }
