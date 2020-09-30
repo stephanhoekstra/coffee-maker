@@ -11,6 +11,7 @@ namespace CoffeeMaker
     public class Boiler
     {
         private readonly ICoffeeMakerApi _api;
+        private bool _isActive;
          
         /// <summary>
         /// I find it confusing that the api uses Get/SetBoiler for both
@@ -25,15 +26,39 @@ namespace CoffeeMaker
             _api = api;
         }
 
-        public event EventHandler<BoilerEventArgs> BoilerChanged;
+        public event EventHandler<BoilerEventArgs> Activated;
+        public event EventHandler<BoilerEventArgs> Deactivated;
 
         public void OnButtonChanged(object sender, ButtonEventArgs e)
         {
-            if(e.Active == false) return;
-            
-            _api.SetBoiler(true);
-            BoilerChanged?.Invoke(this, new BoilerEventArgs {IsEmpty = IsEmpty});
+            if (e.Active) Activate();
         }
-        
+
+
+        public void Activate()
+        {
+            if(_isActive) throw new Exception("Can't activate boiler, already active!");
+
+            _api.SetBoiler(true);
+            _isActive = true;
+
+            Activated?.Invoke(this, new BoilerEventArgs
+            {
+                IsEmpty = IsEmpty,
+            });
+        }
+
+        public void DeActivate()
+        {
+            if (_isActive == false) throw new Exception("Can't deactivate boiler, already inactive!");
+
+            _api.SetBoiler(false);
+            _isActive = false;
+
+            Deactivated?.Invoke(this, new BoilerEventArgs
+            {
+                IsEmpty = IsEmpty,
+            });
+        }
     }
 }

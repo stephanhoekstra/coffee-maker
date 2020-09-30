@@ -2,8 +2,6 @@
 
 namespace CoffeeMaker
 {
-  
-
     public class Warmer
     {
         private readonly ICoffeeMakerApi _api;
