@@ -29,6 +29,7 @@ namespace CoffeeMakerTests
         [Fact]
         public void When_Start_WithEmptyBoiler_Then_ContinueBoiling_ButAlso_ReleasePressure()
         {
+            _api.BoilerHasWater = false;
             _target.Start();
             Assert.True(_api.HeaterIsActive);
             Assert.True(_api.Valve);
