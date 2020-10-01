@@ -2,11 +2,11 @@
 
 namespace CoffeeMaker
 {
-    public class Valve
+    public class Light
     {
         private readonly ICoffeeMakerApi _api;
 
-        public Valve(ICoffeeMakerApi api)
+        public Light(ICoffeeMakerApi api)
         {
             _api = api;
         }
@@ -15,14 +15,15 @@ namespace CoffeeMaker
         {
             switch (e.Status)
             {
-                case PlateStatus.NoPot:
-                    _api.SetValve(true);
-                    break;
-                case PlateStatus.NonEmptyPot:
                 case PlateStatus.EmptyPot:
-                    _api.SetValve(false);
+                    _api.SetLight(false);
                     break;
             }
+        }
+
+        public void OnDeactivated(object sender, BoilerEventArgs e)
+        {
+            _api.SetLight(true);
         }
     }
 }
